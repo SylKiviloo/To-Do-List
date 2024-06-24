@@ -7,10 +7,12 @@ $(document).ready(function () {
       dataType: 'json',
       success: function (response, textStatus) {
         $('#todo-list').empty(); //empty the form before looping through
+
         response.tasks.forEach(function (task) { //loop
-          $('#todo-list').append('<p>' + task.content + '</p>'); //append tasks to list
+          $('#todo-list').append('<div class="row"><p class="col-xs-8">' + task.content + '</p><button class="delete" data-id="' + task.id + '">or Not</button>'); //append tasks to list
         })
         //console.log(response);
+
       },
 
       error: function (request, textStatus, errorMessage) {
@@ -45,6 +47,26 @@ $(document).ready(function () {
   $('#add-task').on('submit', function (event) { //event handler
     event.preventDefault(); //default is page reload
     createTask();
+  });
+
+   
+  var deleteTask = function (id) {
+    $.ajax({
+      type: 'DELETE',
+      url: 'https://fewd-todolist-api.onrender.com/tasks/' + id + '?api_key=1260',
+      success: function (response, textStatus) {
+        showAllTasks();
+        //console.log(response);
+      },
+
+      error: function (request, textStatus, errorMessage) {
+        console.log(errorMessage);
+      }
+    });
+  }
+
+  $(document).on('click', '.delete', function () {
+    deleteTask($(this).data('id')) //'this' refers to what is being event handled - buttons
   });
 
   showAllTasks();
