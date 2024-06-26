@@ -9,9 +9,9 @@ $(document).ready(function () {
         $('#todo-list').empty(); //empty the form before looping through
 
         response.tasks.forEach(function (task) { //loop
-          $('#todo-list').append('<div class="row"><input type="checkbox" class="mark-complete" data-id="' + task.id + '"' + (task.completed ? 'checked' : '') + '><p class="col-xs-8">' + task.content + '</p><button class="delete" data-id="' + task.id + '">or Not</button></div>'); //append tasks to list, then button, then checkbox(move this to first, inside div)
+          $('#todo-list').prepend('<div class="row" id="fade"><input type="checkbox" class="mark-complete" data-id="' + task.id + '"' + (task.completed ? 'checked' : '') + '><p class="col-xs-8">' + task.content + '</p><button class="delete" data-id="' + task.id + '">or Not</button>'); //prepend tasks to list, then button, then checkbox(move this to first, inside div)
         })
-        //console.log(response);
+        console.log(response);
 
       },
       error: function (request, textStatus, errorMessage) {
@@ -23,7 +23,7 @@ $(document).ready(function () {
   var createTask = function () {
     $.ajax({
       type: 'POST',
-      url: 'https://fewd-todolist-api.onrenedr.com/tasks?api_key=1260',
+      url: 'https://fewd-todolist-api.onrender.com/tasks?api_key=1260',
       contentType: 'application/json',
       dataType: 'json',
       data: JSON.stringify({
@@ -32,7 +32,7 @@ $(document).ready(function () {
         }
       }),
       success: function (response, textStatus) {
-        //console.log(response);
+        console.log(response);
         $('#new-task-input').val(''); //add it to the list
         showAllTasks();
       },
@@ -98,14 +98,36 @@ $(document).ready(function () {
     });
   };
 
+  var fadeOut = function () {
+    //$('#fade').fadeOut(1000)
+    //$(this).data('id').animate({ opacity: "hide" }, "slow")
+    $('#fade').fadeOut(1500)
+  } 
+
+  
 
   $(document).on('change', '.mark-complete', function () { //event handler with callback calling either function
-    if (this.checked) {
-      markComplete($(this).data('id')); //mark that task id complete if the checkbox is checked
+      if (this.checked) {
+      console.log('checked')
+      //markComplete($(this).data('id')) //mark that task id complete if the checkbox is checked
+      //$('.row').fadeOut(1000)
+      //deleteTask($(this).data('id')).fadeOut(1000)
+      //fadeOut($(this).data('id'))
+      //var fade = function(){$(this).data('id').animate({ opacity: "hide" }, "slow");}
+      //fadeOut($(this).data('id'))
+      //$('p').data('id').fadeOut('slow')
+      //fadeOut($(this).data('id'))
+      deleteTask(fadeOut())
+      
     } else {
-      markActive($(this).data('id'));
+      markActive($(this).data('id'))
+
+
     }
+  
   });
+
+
 
   showAllTasks();
 

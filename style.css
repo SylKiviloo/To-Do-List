@@ -1,8 +1,65 @@
-h2 {
-  color: blue;
+body {
+  background: url('/images/magic-cat.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
-h3 {
-  color: green;
-  font-size: 1.5rem;
+/*container styles*/
+div.container {
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+ }
+
+ /*heading styles*/
+h1 {
+  color: rgb(54, 8, 110);
+  font-size: 3rem;
+  margin-left: 0;
+  padding-top: 1.5rem;
+}
+
+/*add input styles*/
+#add-task {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  width: 100%;
+  margin: 0 auto;
+}
+
+p {
+  font-size: 1.8rem;
+  /*background: #343535;*/
+  color: #fff;
+  margin-top: 15px;
+  /*border-radius: 25px;*/
+  /*padding-top: 15px;*/
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  /*border: 1px solid green;*/
+}
+
+
+
+div#fade.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto;
+  /*border: 1px solid purple;*/
+}
+
+button.delete {
+  background-color: rgb(163, 159, 159);
+  height: 2rem;
+}
+/*checkbox styles*/
+input.mark-complete {
+  width: 30px;
+  height: 30px;
 }
