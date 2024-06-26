@@ -8,11 +8,10 @@ $(document).ready(function () {
       success: function (response, textStatus) {
         $('#todo-list').empty(); //empty the form before looping through
 
-        response.tasks.forEach(function (task) { //loop
-          $('#todo-list').prepend('<div class="row" id="fade"><input type="checkbox" class="mark-complete" data-id="' + task.id + '"' + (task.completed ? 'checked' : '') + '><p class="col-xs-8">' + task.content + '</p><button class="delete" data-id="' + task.id + '">or Not</button>'); //prepend tasks to list, then button, then checkbox(move this to first, inside div)
+        response.tasks.forEach(function (task) {
+          $('#todo-list').prepend('<div class="row task"><input type="checkbox" class="mark-complete" data-id="' + task.id + '"' + (task.completed ? 'checked' : '') + '><p class="col-xs-8">' + task.content + '</p><button class="delete" data-id="' + task.id + '">or Not</button>');
         })
         console.log(response);
-
       },
       error: function (request, textStatus, errorMessage) {
         console.log(errorMessage);
@@ -54,9 +53,7 @@ $(document).ready(function () {
       url: 'https://fewd-todolist-api.onrender.com/tasks/' + id + '?api_key=1260',
       success: function (response, textStatus) {
         showAllTasks();
-        //console.log(response);
       },
-
       error: function (request, textStatus, errorMessage) {
         console.log(errorMessage);
       }
@@ -64,7 +61,7 @@ $(document).ready(function () {
   }
 
   $(document).on('click', '.delete', function () {
-    deleteTask($(this).data('id')) //'this' refers to what is being event handled - buttons
+    deleteTask($(this).data('id'))
   });
 
 
@@ -98,36 +95,16 @@ $(document).ready(function () {
     });
   };
 
-  var fadeOut = function () {
-    //$('#fade').fadeOut(1000)
-    //$(this).data('id').animate({ opacity: "hide" }, "slow")
-    $('#fade').fadeOut(1500)
-  } 
-
   
-
-  $(document).on('change', '.mark-complete', function () { //event handler with callback calling either function
-      if (this.checked) {
-      console.log('checked')
-      //markComplete($(this).data('id')) //mark that task id complete if the checkbox is checked
-      //$('.row').fadeOut(1000)
-      //deleteTask($(this).data('id')).fadeOut(1000)
-      //fadeOut($(this).data('id'))
-      //var fade = function(){$(this).data('id').animate({ opacity: "hide" }, "slow");}
-      //fadeOut($(this).data('id'))
-      //$('p').data('id').fadeOut('slow')
-      //fadeOut($(this).data('id'))
-      deleteTask(fadeOut())
-      
+  $(document).on('change', '.mark-complete', function () { 
+    if (this.checked) {
+      markComplete($(this).data('id')) 
+      var row = $(this).parent();
+      row.fadeOut(1500);  
     } else {
       markActive($(this).data('id'))
-
-
     }
-  
   });
-
-
 
   showAllTasks();
 

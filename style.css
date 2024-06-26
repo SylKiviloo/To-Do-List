@@ -1,7 +1,9 @@
+/*body styles*/
 body {
   background: url('/images/magic-cat.jpg');
   background-size: cover;
   background-repeat: no-repeat;
+  background-color: gray;
 }
 
 /*container styles*/
@@ -30,30 +32,26 @@ h1 {
   margin: 0 auto;
 }
 
+/*paragraph styles*/
 p {
   font-size: 1.8rem;
-  /*background: #343535;*/
   color: #fff;
   margin-top: 15px;
-  /*border-radius: 25px;*/
-  /*padding-top: 15px;*/
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  /*border: 1px solid green;*/
 }
 
-
-
-div#fade.row {
+/*row styles*/
+div.row {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
   margin: 0 auto;
-  /*border: 1px solid purple;*/
 }
 
+/*button styles*/
 button.delete {
   background-color: rgb(163, 159, 159);
   height: 2rem;
